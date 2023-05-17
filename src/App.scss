@@ -1,0 +1,150 @@
+$gr-1: #B9EDF8;
+$gr-2: #39BAE8;
+$t: transparent;
+
+@mixin fx ($align-items, $justify-content) {
+  display: flex;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
+
+html {
+  box-sizing: border-box;
+}
+* {
+  font-family: inherit;
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  @include fx(center, center);
+  min-height: 100vh;
+  background: linear-gradient(to top right, $gr-1 0%, $gr-2 100%);
+  font-family: sans-serif;
+}
+
+.card {
+  background: white;
+  display: flex;
+  width: 25rem;
+  height: 22rem;
+  box-shadow: .5em .5em .8em .3em rgba(0, 0, 0, .2);
+  border-radius: .4em;
+  overflow: hidden;
+
+  &__state {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    color: #0000A1;
+
+    &__item {
+      flex: 1;
+      @include fx(center, center);
+      flex-direction: column;
+      background: #a3daff;
+      margin: 1px;
+      cursor: pointer;
+
+      &:hover {
+        background: #CCFFCC;
+      }
+    }
+    &__number {
+      font-size: 1.5em;
+      font-weight: 700;
+    }
+    &__text {
+      font-weight: 200;
+      font-size: .8em;
+    }
+  }
+
+  &__profile {
+    @include fx(center, space-around);
+    flex-direction: column;
+    flex: 3;
+    padding: 1em;
+  }
+
+  &__avatar {
+    width: 10em;
+    height: 10em;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  &__img {
+    display: inline-block;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    bottom: 10%;
+    left: 10%;
+  }
+  &__border {
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid black;
+    transition: transform 1s ease-in-out;
+  }
+  &__border:nth-child(2) {
+    top: 1%;
+    right: 1%;
+    bottom: 1%;
+    left: 1%;
+    border-right-color: $t;
+  }
+  &__border:nth-child(3) {
+    top: 5%;
+    right: 5%;
+    bottom: 5%;
+    left: 5%;
+    border-left-color: $t;
+  }
+  &__avatar:hover {
+    .card__border:nth-child(2) {
+      transform: rotate(-360deg);
+    }
+    .card__border:nth-child(3) {
+      transform: rotate(360deg);
+    }
+  }
+
+  &__bio {
+    text-align: center;
+    margin: 1em 0;
+  }
+
+  &__btn-holder {
+    width: 70%;
+    @include fx(stretch, center);
+    flex-direction: column;
+  }
+
+  &__btn {
+    --btn-fg: #1F6ED4;
+    --btn-bg: $t;
+    outline: none;
+    border: 2px solid var(--btn-fg);
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    font-weight: 700;
+    font-size: 1em;
+    cursor: pointer;
+    padding: .3em 1em;
+    border-radius: 1em;
+    margin: .2em 1em;
+
+    &:hover {
+      --btn-bg: #0000A1;
+      --btn-fg: white;
+      border-color: var(--btn-bg);
+    }
+  }
+}
